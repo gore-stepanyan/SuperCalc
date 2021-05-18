@@ -220,5 +220,11 @@ namespace SuperCalc
             RenameForm renameForm = new RenameForm();
             renameForm.ShowDialog();
         }
+
+        private void перейтиВТестовыйРежимToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TestForm testForm = new TestForm();
+            testForm.Show();
+        }
     }
 }
