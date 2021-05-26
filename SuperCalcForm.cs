@@ -47,7 +47,7 @@ namespace SuperCalc
             tabControl.TabPages.Add(Data.dataSet.Tables[Data.dataSet.Tables.Count - 1].TableName);
             tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(tableLayoutPanel);
             tabControl.TabPages[tabControl.TabPages.Count - 1].ContextMenuStrip = contextMenuStrip;
-            LayoutInit(ref tableLayoutPanel);
+            LayoutInit(ref tableLayoutPanel, ref dataGridView, ref horizontalGrid, ref verticalGrid);
 
             isSaved = false;
         }
@@ -62,10 +62,10 @@ namespace SuperCalc
             dataGridView.AllowUserToAddRows = true;
             dataGridView.GridColor = SystemColors.ControlLight;
             dataGridView.AllowUserToAddRows = false;
-            dataGridView.SelectionChanged += dataGridView_SelectionChanged;
             dataGridView.SelectionChanged += DataGridView_SelectionChanged;
-            dataGridView.CurrentCellChanged += dataGridView_CurrentCellChanged;
-            dataGridView.CellValueChanged += dataGridView_CellValueChanged;
+            dataGridView.SelectionChanged += ColumnRowSelectedCellRedraw;
+            dataGridView.CurrentCellChanged += DataGridView_CurrentCellChanged;
+            dataGridView.CellValueChanged += DataGridView_CellValueChanged;
             dataGridView.Scroll += DataGridView_Scroll;
             dataGridView.ColumnWidthChanged += DataGridView_ColumnWidthChanged;
             dataGridView.RowHeightChanged += DataGridView_RowHeightChanged;
@@ -86,16 +86,16 @@ namespace SuperCalc
             dataGridView.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
             dataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
         }
-        private void dataGridView_CellValueChanged(object sender, EventArgs e)
+        private void DataGridView_CellValueChanged(object sender, EventArgs e)
         {
             isSaved = false;
         }
-        private void dataGridView_CurrentCellChanged(object sender, EventArgs e)
+        private void DataGridView_CurrentCellChanged(object sender, EventArgs e)
         {
             DataGridView dataGridView = sender as DataGridView;
             positionLabel.Text = Convert.ToChar('A' + dataGridView.CurrentCellAddress.X).ToString() + (dataGridView.CurrentCellAddress.Y + 1).ToString();
         }
-        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             
             DataGridView dataGridView = sender as DataGridView;
@@ -139,9 +139,7 @@ namespace SuperCalc
             }
 
             Data.Import(fileName);
-            tabControl.TabPages.Clear();
             LoadTables();
-            Redraw();
             isSaved = false;
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -218,22 +216,31 @@ namespace SuperCalc
         private void LoadTables()
         {
             dataGrids.Clear();
-            for(int i = 0; i < Data.dataSet.Tables.Count; i++)
+            horizontalGrids.Clear();
+            verticalGrids.Clear();
+            tabControl.TabPages.Clear();
+
+            DoubleBufferedDataGridView dataGridView;
+            DoubleBufferedDataGridView horizontalGrid;
+            DoubleBufferedDataGridView verticalGrid;
+            TableLayoutPanel tableLayoutPanel;
+
+            for (int i = 0; i < Data.dataSet.Tables.Count; i++)
             {
-                DoubleBufferedDataGridView dataGridView = new DoubleBufferedDataGridView();
+                dataGridView = new DoubleBufferedDataGridView();
+                horizontalGrid = new DoubleBufferedDataGridView();
+                verticalGrid = new DoubleBufferedDataGridView();
+                tableLayoutPanel = new TableLayoutPanel();
                 GridInit(ref dataGridView);
+                RowColumnInit(i, ref horizontalGrid, ref verticalGrid);
                 dataGridView.DataSource = Data.dataSet.Tables[i];
                 dataGrids.Add(dataGridView);
-            }
-            Redraw();
-        }
-        private void Redraw()
-        {
-            tabControl.TabPages.Clear();
-            for (int i = 0; i < dataGrids.Count; i++)
-            {
+                verticalGrids.Add(verticalGrid);
+                horizontalGrids.Add(horizontalGrid);
+
+                LayoutInit(ref tableLayoutPanel, ref dataGridView, ref horizontalGrid, ref verticalGrid);
                 tabControl.TabPages.Add(Data.dataSet.Tables[i].TableName.Trim('\'', '$'));
-                tabControl.TabPages[i].Controls.Add(dataGrids[i]);
+                tabControl.TabPages[i].Controls.Add(tableLayoutPanel);
                 tabControl.TabPages[i].ContextMenuStrip = contextMenuStrip;
             }
         }
@@ -265,7 +272,7 @@ namespace SuperCalc
             horizontalGrid.AllowUserToResizeRows = false;
             horizontalGrid.ReadOnly = true;
 
-            for (int i = 0; i < 26; i++)
+            for (int i = 0; i < Data.dataSet.Tables[index].Columns.Count; i++)
             {
                 horizontalGrid[i, 0].Value = Convert.ToChar('A' + i).ToString();
             }
@@ -281,7 +288,7 @@ namespace SuperCalc
             verticalGrid.AllowUserToAddRows = false;
             verticalGrid.ReadOnly = true;
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < Data.dataSet.Tables[index].Rows.Count + 1; i++)
             {
                 verticalGrid[0, i].Value = (i + 1).ToString();
             }
@@ -307,7 +314,7 @@ namespace SuperCalc
             }
         }
 
-        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        private void ColumnRowSelectedCellRedraw(object sender, EventArgs e)
         {
             //if (sender == null)
             //    return;
@@ -342,16 +349,16 @@ namespace SuperCalc
             horizontalGrids[tabControl.SelectedIndex].Columns[e.Column.Index].Width = e.Column.Width;
         }
 
-        private void LayoutInit(ref TableLayoutPanel tableLayoutPanel)
+        private void LayoutInit(ref TableLayoutPanel tableLayoutPanel, ref DoubleBufferedDataGridView dataGridView, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)
         {
             //tableLayoutPanel = new TableLayoutPanel();
             tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
             tableLayoutPanel.ColumnCount = 2;
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 95F));
-            tableLayoutPanel.Controls.Add(dataGrids[Data.dataSet.Tables.Count - 1], 1, 1);
-            tableLayoutPanel.Controls.Add(horizontalGrids[Data.dataSet.Tables.Count - 1], 1, 0);
-            tableLayoutPanel.Controls.Add(verticalGrids[Data.dataSet.Tables.Count - 1], 0, 1);
+            tableLayoutPanel.Controls.Add(dataGridView, 1, 1);
+            tableLayoutPanel.Controls.Add(horizontalGrid, 1, 0);
+            tableLayoutPanel.Controls.Add(verticalGrid, 0, 1);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.ForeColor = SystemColors.ActiveCaptionText;
             tableLayoutPanel.Location = new Point(0, 0);
