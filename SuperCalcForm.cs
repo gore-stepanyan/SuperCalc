@@ -63,13 +63,12 @@ namespace SuperCalc
             dataGridView.GridColor = SystemColors.ControlLight;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.SelectionChanged += dataGridView_SelectionChanged;
+            dataGridView.SelectionChanged += DataGridView_SelectionChanged;
             dataGridView.CurrentCellChanged += dataGridView_CurrentCellChanged;
             dataGridView.CellValueChanged += dataGridView_CellValueChanged;
-
             dataGridView.Scroll += DataGridView_Scroll;
             dataGridView.ColumnWidthChanged += DataGridView_ColumnWidthChanged;
             dataGridView.RowHeightChanged += DataGridView_RowHeightChanged;
-            dataGridView.CurrentCellChanged += DataGridView_CurrentCellChanged;
             //dataGridView.RowCount = 100;
             //dataGridView.ColumnCount = 26;
             dataGridView.Dock = DockStyle.Fill;
@@ -199,17 +198,12 @@ namespace SuperCalc
         }
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int temp = tabControl.SelectedIndex;
+            isSaved = false;
             Data.dataSet.Tables.RemoveAt(tabControl.SelectedIndex);
             dataGrids.RemoveAt(tabControl.SelectedIndex);
             horizontalGrids.RemoveAt(tabControl.SelectedIndex);
             verticalGrids.RemoveAt(tabControl.SelectedIndex);
             tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
-
-            //пипец
-            //tabControl.SelectedIndex = 0;
-
-            isSaved = false;
         }
         private void SuperCalcForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -313,23 +307,20 @@ namespace SuperCalc
             }
         }
 
-        private void DataGridView_CurrentCellChanged(object sender, EventArgs e)
+        private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //if (sender == null || tabControl.SelectedIndex >= dataGrids.Count)
+            //if (sender == null)
             //    return;
-           
-           // try
-            //{
+            try
+            {
                 DataGridView dataGridView = sender as DataGridView;
 
                 horizontalGrids[tabControl.SelectedIndex].CurrentCell = horizontalGrids[tabControl.SelectedIndex][dataGridView.CurrentCell.ColumnIndex, 0];
                 verticalGrids[tabControl.SelectedIndex].CurrentCell = verticalGrids[tabControl.SelectedIndex][0, dataGridView.CurrentCell.RowIndex];
-            //}
-        //    catch(Exception)
-        //    {
-        //        Console.WriteLine("a");
-        //    }
-}
+            }
+            catch
+            { }
+        }
 
         private void VerticalGrid_RowHeightChanged(object sender, DataGridViewRowEventArgs e)
         {
