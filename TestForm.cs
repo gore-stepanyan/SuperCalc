@@ -13,10 +13,6 @@ namespace SuperCalc
 {
     public partial class TestForm : Form
     {
-        TableLayoutPanel tableLayoutPanel;
-        DoubleBufferedDataGridView dataGridView = new DoubleBufferedDataGridView();
-        DoubleBufferedDataGridView verticalGrid = new DoubleBufferedDataGridView();
-        DoubleBufferedDataGridView horizontalGrid = new DoubleBufferedDataGridView();
 
         public TestForm()
         {
@@ -26,6 +22,10 @@ namespace SuperCalc
             GridsInit();
         }
 
+        TableLayoutPanel tableLayoutPanel;
+        DoubleBufferedDataGridView dataGridView = new DoubleBufferedDataGridView();
+        DoubleBufferedDataGridView verticalGrid = new DoubleBufferedDataGridView();
+        DoubleBufferedDataGridView horizontalGrid = new DoubleBufferedDataGridView();
         private void GridsInit()
         {
             dataGridView.Scroll += DataGridView1_Scroll;
