@@ -40,6 +40,24 @@ namespace SuperCalc
                 adapter.Fill(dataTable);
                 dataTable.TableName = tableName;
                 dataSet.Tables.Add(dataTable);
+
+                DataRow dataRow;
+                int tempColumnCount = dataTable.Columns.Count;
+                int rowColumnCount = dataTable.Rows.Count;
+                
+                for (int i = 0; i < 26 - tempColumnCount; i++)
+                {
+                    dataTable.Columns.Add();
+                }
+                for (int i = 0; i < 1000 - rowColumnCount; i++)
+                {
+                    dataRow = dataTable.NewRow();
+                    dataTable.Rows.Add(dataRow);
+                }
+                for (int i = tempColumnCount; i < 26; i++)
+                {
+                    dataTable.Rows[999][i] = "\0";
+                }
             }
 
             connection.Close();

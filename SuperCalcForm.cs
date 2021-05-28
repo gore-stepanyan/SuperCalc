@@ -11,9 +11,6 @@ namespace SuperCalc
 {
     public partial class SuperCalcForm : MaterialForm
     {
-        //TableLayoutPanel tableLayoutPanel;
-        //DoubleBufferedDataGridView dataGridView = new DoubleBufferedDataGridView();
-        
         List<DoubleBufferedDataGridView> dataGrids = new List<DoubleBufferedDataGridView>();
         List<DoubleBufferedDataGridView> horizontalGrids = new List<DoubleBufferedDataGridView>();
         List<DoubleBufferedDataGridView> verticalGrids = new List<DoubleBufferedDataGridView>();
@@ -69,20 +66,10 @@ namespace SuperCalc
             dataGridView.Scroll += DataGridView_Scroll;
             dataGridView.ColumnWidthChanged += DataGridView_ColumnWidthChanged;
             dataGridView.RowHeightChanged += DataGridView_RowHeightChanged;
-            //dataGridView.RowCount = 100;
-            //dataGridView.ColumnCount = 26;
             dataGridView.Dock = DockStyle.Fill;
             dataGridView.BorderStyle = BorderStyle.None;
             dataGridView.ColumnHeadersVisible = false;
             dataGridView.RowHeadersVisible = false;
-
-            //DataTable dataTable = new DataTable();
-            //for (int i = 0; i <= 25; i++)
-            //    dataTable.Columns.Add(new DataColumn(Convert.ToChar('A' + i).ToString()));
-
-            //for (int i = 0; i < 1000; i++)
-            //    dataTable.Rows.Add();
-
             dataGridView.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
             dataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
         }
@@ -267,7 +254,7 @@ namespace SuperCalc
             horizontalGrid.BorderStyle = BorderStyle.None;
             horizontalGrid.ColumnHeadersVisible = false;
             horizontalGrid.RowHeadersVisible = false;
-            horizontalGrid.ScrollBars = ScrollBars.None;
+            horizontalGrid.ScrollBars = ScrollBars.Vertical;
             horizontalGrid.AllowUserToAddRows = false;
             horizontalGrid.AllowUserToResizeRows = false;
             horizontalGrid.ReadOnly = true;
@@ -284,9 +271,10 @@ namespace SuperCalc
             verticalGrid.BorderStyle = BorderStyle.None;
             verticalGrid.ColumnHeadersVisible = false;
             verticalGrid.RowHeadersVisible = false;
-            verticalGrid.ScrollBars = ScrollBars.None;
+            verticalGrid.ScrollBars = ScrollBars.Horizontal;
             verticalGrid.AllowUserToAddRows = false;
             verticalGrid.ReadOnly = true;
+            verticalGrid.Columns[0].Width = 40;
 
             for (int i = 0; i < Data.dataSet.Tables[index].Rows.Count; i++)
             {
@@ -316,8 +304,6 @@ namespace SuperCalc
 
         private void ColumnRowSelectedCellRedraw(object sender, EventArgs e)
         {
-            //if (sender == null)
-            //    return;
             try
             {
                 DataGridView dataGridView = sender as DataGridView;
@@ -351,11 +337,10 @@ namespace SuperCalc
 
         private void LayoutInit(ref TableLayoutPanel tableLayoutPanel, ref DoubleBufferedDataGridView dataGridView, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)
         {
-            //tableLayoutPanel = new TableLayoutPanel();
             tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
             tableLayoutPanel.ColumnCount = 2;
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 95F));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 47));
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
             tableLayoutPanel.Controls.Add(dataGridView, 1, 1);
             tableLayoutPanel.Controls.Add(horizontalGrid, 1, 0);
             tableLayoutPanel.Controls.Add(verticalGrid, 0, 1);
@@ -364,11 +349,10 @@ namespace SuperCalc
             tableLayoutPanel.Location = new Point(0, 0);
             tableLayoutPanel.Margin = new Padding(0);
             tableLayoutPanel.RowCount = 2;
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 29));
+            tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             tableLayoutPanel.Size = new Size(800, 450);
             tableLayoutPanel.TabIndex = 0;
-            //Controls.Add(tableLayoutPanel);
         }
 
         private void DataGridView_Scroll(object sender, ScrollEventArgs e)
