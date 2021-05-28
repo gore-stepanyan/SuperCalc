@@ -288,7 +288,7 @@ namespace SuperCalc
             verticalGrid.AllowUserToAddRows = false;
             verticalGrid.ReadOnly = true;
 
-            for (int i = 0; i < Data.dataSet.Tables[index].Rows.Count + 1; i++)
+            for (int i = 0; i < Data.dataSet.Tables[index].Rows.Count; i++)
             {
                 verticalGrid[0, i].Value = (i + 1).ToString();
             }
