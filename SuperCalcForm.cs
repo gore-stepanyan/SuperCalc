@@ -84,7 +84,6 @@ namespace SuperCalc
         }
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            
             DataGridView dataGridView = sender as DataGridView;
             string first = Convert.ToChar('A' + dataGridView.CurrentCellAddress.X).ToString() + (dataGridView.CurrentCellAddress.Y + 1).ToString();
 
@@ -238,12 +237,6 @@ namespace SuperCalc
             renameForm.ShowDialog();
         }
 
-        private void перейтиВТестовыйРежимToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TestForm testForm = new TestForm();
-            testForm.Show();
-        }
-
         private void RowColumnInit(int index, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)
         {
             horizontalGrid.ColumnWidthChanged += HorizontalGrid_ColumnWidthChanged;
@@ -254,10 +247,11 @@ namespace SuperCalc
             horizontalGrid.BorderStyle = BorderStyle.None;
             horizontalGrid.ColumnHeadersVisible = false;
             horizontalGrid.RowHeadersVisible = false;
-            horizontalGrid.ScrollBars = ScrollBars.Vertical;
+            horizontalGrid.ScrollBars = ScrollBars.None;
             horizontalGrid.AllowUserToAddRows = false;
             horizontalGrid.AllowUserToResizeRows = false;
             horizontalGrid.ReadOnly = true;
+            horizontalGrid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
 
             for (int i = 0; i < Data.dataSet.Tables[index].Columns.Count; i++)
             {
@@ -271,10 +265,11 @@ namespace SuperCalc
             verticalGrid.BorderStyle = BorderStyle.None;
             verticalGrid.ColumnHeadersVisible = false;
             verticalGrid.RowHeadersVisible = false;
-            verticalGrid.ScrollBars = ScrollBars.Horizontal;
+            verticalGrid.ScrollBars = ScrollBars.None;
             verticalGrid.AllowUserToAddRows = false;
             verticalGrid.ReadOnly = true;
             verticalGrid.Columns[0].Width = 40;
+            verticalGrid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
 
             for (int i = 0; i < Data.dataSet.Tables[index].Rows.Count; i++)
             {

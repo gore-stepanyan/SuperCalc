@@ -51,7 +51,6 @@
             this.contextMenuStrip = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.deletePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renamePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.перейтиВТестовыйРежимToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripPanel.SuspendLayout();
@@ -123,28 +122,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.openToolStripMenuItem.Text = "Импорт из Excel";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // openXmlToolStripMenuItem
             // 
             this.openXmlToolStripMenuItem.Name = "openXmlToolStripMenuItem";
-            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.openXmlToolStripMenuItem.Text = "Открыть";
             this.openXmlToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.saveToolStripMenuItem.Text = "Сохранить";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.saveAsToolStripMenuItem.Text = "Сохранить как...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -173,8 +172,6 @@
             // 
             // видToolStripMenuItem
             // 
-            this.видToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.перейтиВТестовыйРежимToolStripMenuItem});
             this.видToolStripMenuItem.Name = "видToolStripMenuItem";
             this.видToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.видToolStripMenuItem.Text = "Вид";
@@ -289,13 +286,6 @@
             this.renamePageToolStripMenuItem.Text = "Переименовать страницу";
             this.renamePageToolStripMenuItem.Click += new System.EventHandler(this.renamePageToolStripMenuItem_Click);
             // 
-            // перейтиВТестовыйРежимToolStripMenuItem
-            // 
-            this.перейтиВТестовыйРежимToolStripMenuItem.Name = "перейтиВТестовыйРежимToolStripMenuItem";
-            this.перейтиВТестовыйРежимToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
-            this.перейтиВТестовыйРежимToolStripMenuItem.Text = "Перейти в тестовый режим";
-            this.перейтиВТестовыйРежимToolStripMenuItem.Click += new System.EventHandler(this.перейтиВТестовыйРежимToolStripMenuItem_Click);
-            // 
             // SuperCalcForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,7 +339,6 @@
         private System.Windows.Forms.ToolStripMenuItem renamePageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьСтраницуToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem перейтиВТестовыйРежимToolStripMenuItem;
     }
 }
 
