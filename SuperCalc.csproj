@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedDataGridView, Version=1.2.25707.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DG.AdvancedDataGridView.1.2.25707.1\lib\net40\AdvancedDataGridView.dll</HintPath>
-    </Reference>
     <Reference Include="DoubleBufferedForms">
       <HintPath>..\DoubleBufferedForms\bin\Release\DoubleBufferedForms.dll</HintPath>
     </Reference>
@@ -58,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskForm.Designer.cs">
+      <DependentUpon>AskForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data.cs" />
     <Compile Include="RenameForm.cs">
       <SubType>Form</SubType>
@@ -73,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AskForm.resx">
+      <DependentUpon>AskForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -98,8 +104,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Scripts\jquery-3.3.1.min.map" />
-    <None Include="Scripts\jquery-3.3.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -132,19 +136,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\jquery-datagridview.css" />
-    <Content Include="Content\jquery-datagridview.min.css" />
-    <Content Include="Content\jquery-datagridview.style.css" />
-    <Content Include="Content\jquery-datagridview.style.min.css" />
-    <Content Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\jquery-datagridview.js" />
-    <Content Include="Scripts\jquery-datagridview.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

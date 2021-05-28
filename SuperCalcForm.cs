@@ -48,10 +48,13 @@ namespace SuperCalc
 
             isSaved = false;
         }
+
         private void tabControl_DoubleClick(object sender, EventArgs e)
         {
-            MaterialMessageBox.Show("Вы гей.", "Внимание!");
+            AskForm askForm = new AskForm("Вы гей!");
+            askForm.ShowDialog();
         }
+
         private void GridInit(ref DoubleBufferedDataGridView dataGridView)
         {
             dataGridView.Dock = DockStyle.Fill;
@@ -73,15 +76,18 @@ namespace SuperCalc
             dataGridView.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders);
             dataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
         }
+
         private void DataGridView_CellValueChanged(object sender, EventArgs e)
         {
             isSaved = false;
         }
+
         private void DataGridView_CurrentCellChanged(object sender, EventArgs e)
         {
             DataGridView dataGridView = sender as DataGridView;
             positionLabel.Text = Convert.ToChar('A' + dataGridView.CurrentCellAddress.X).ToString() + (dataGridView.CurrentCellAddress.Y + 1).ToString();
         }
+
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             DataGridView dataGridView = sender as DataGridView;
@@ -103,6 +109,7 @@ namespace SuperCalc
                 positionLabel.Text = last + ":" + first;
             }
         }
+
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!isSaved)
@@ -128,6 +135,7 @@ namespace SuperCalc
             LoadTables();
             isSaved = false;
         }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!isSaved)
@@ -152,6 +160,7 @@ namespace SuperCalc
             Data.Open(fileName);
             LoadTables();
         }
+
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
@@ -168,6 +177,7 @@ namespace SuperCalc
             }
             isSaved = true;
         }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (fileName.Contains(".xml") || fileName.Contains(".xml\r"))
@@ -180,6 +190,7 @@ namespace SuperCalc
             }
             isSaved = true;
         }
+
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isSaved = false;
@@ -189,6 +200,7 @@ namespace SuperCalc
             verticalGrids.RemoveAt(tabControl.SelectedIndex);
             tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
         }
+
         private void SuperCalcForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!isSaved)
@@ -199,6 +211,7 @@ namespace SuperCalc
                 }
             }
         }
+
         private void LoadTables()
         {
             dataGrids.Clear();
