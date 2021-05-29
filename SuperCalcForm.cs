@@ -247,7 +247,14 @@ namespace SuperCalc
         private void renamePageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RenameForm renameForm = new RenameForm();
-            renameForm.ShowDialog();
+            string newName = renameForm.Show();
+            if (newName == null)
+                return;
+            else
+            {
+                tabControl.SelectedTab.Text = newName;
+                Data.dataSet.Tables[tabControl.SelectedIndex].TableName = newName;
+            }
         }
 
         private void RowColumnInit(int index, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)

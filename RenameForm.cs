@@ -22,5 +22,13 @@ namespace SuperCalc
         {
             newName = textBox.Text;
         }
+
+        public new string Show()
+        {
+            if (ShowDialog() == DialogResult.Yes)
+                return newName;
+            else
+                return "";
+        }
     }
 }

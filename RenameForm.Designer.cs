@@ -29,47 +29,49 @@ namespace SuperCalc
         /// </summary>
         private void InitializeComponent()
         {
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
+            this.cancelButton = new MaterialSkin.Controls.MaterialButton();
+            this.renameButton = new MaterialSkin.Controls.MaterialButton();
             this.textBox = new System.Windows.Forms.TextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
-            // materialButton1
+            // cancelButton
             // 
-            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton1.Depth = 0;
-            this.materialButton1.DrawShadows = true;
-            this.materialButton1.HighEmphasis = true;
-            this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(56, 105);
-            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton1.Name = "materialButton1";
-            this.materialButton1.Size = new System.Drawing.Size(82, 36);
-            this.materialButton1.TabIndex = 0;
-            this.materialButton1.Text = "Отмена";
-            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton1.UseAccentColor = false;
-            this.materialButton1.UseVisualStyleBackColor = true;
+            this.cancelButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cancelButton.Depth = 0;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.DrawShadows = true;
+            this.cancelButton.HighEmphasis = true;
+            this.cancelButton.Icon = null;
+            this.cancelButton.Location = new System.Drawing.Point(211, 108);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.cancelButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(82, 36);
+            this.cancelButton.TabIndex = 0;
+            this.cancelButton.Text = "Отмена";
+            this.cancelButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.cancelButton.UseAccentColor = false;
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // materialButton2
+            // renameButton
             // 
-            this.materialButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton2.Depth = 0;
-            this.materialButton2.DrawShadows = true;
-            this.materialButton2.HighEmphasis = true;
-            this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(146, 105);
-            this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton2.Name = "materialButton2";
-            this.materialButton2.Size = new System.Drawing.Size(148, 36);
-            this.materialButton2.TabIndex = 1;
-            this.materialButton2.Text = "Переименовать";
-            this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton2.UseAccentColor = false;
-            this.materialButton2.UseVisualStyleBackColor = true;
+            this.renameButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.renameButton.Depth = 0;
+            this.renameButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.renameButton.DrawShadows = true;
+            this.renameButton.HighEmphasis = true;
+            this.renameButton.Icon = null;
+            this.renameButton.Location = new System.Drawing.Point(55, 108);
+            this.renameButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.renameButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.renameButton.Name = "renameButton";
+            this.renameButton.Size = new System.Drawing.Size(148, 36);
+            this.renameButton.TabIndex = 1;
+            this.renameButton.Text = "Переименовать";
+            this.renameButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.renameButton.UseAccentColor = false;
+            this.renameButton.UseVisualStyleBackColor = true;
             // 
             // textBox
             // 
@@ -94,13 +96,15 @@ namespace SuperCalc
             // 
             // RenameForm
             // 
+            this.AcceptButton = this.renameButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.textBox);
-            this.Controls.Add(this.materialButton2);
-            this.Controls.Add(this.materialButton1);
+            this.Controls.Add(this.renameButton);
+            this.Controls.Add(this.cancelButton);
             this.Name = "RenameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Переименовать";
@@ -111,8 +115,8 @@ namespace SuperCalc
 
         #endregion
 
-        private MaterialSkin.Controls.MaterialButton materialButton1;
-        private MaterialSkin.Controls.MaterialButton materialButton2;
+        private MaterialSkin.Controls.MaterialButton cancelButton;
+        private MaterialSkin.Controls.MaterialButton renameButton;
         private System.Windows.Forms.TextBox textBox;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
