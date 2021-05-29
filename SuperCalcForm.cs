@@ -255,6 +255,8 @@ namespace SuperCalc
                 tabControl.SelectedTab.Text = newName;
                 Data.dataSet.Tables[tabControl.SelectedIndex].TableName = newName;
             }
+
+            isSaved = false;
         }
 
         private void RowColumnInit(int index, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)
@@ -305,6 +307,8 @@ namespace SuperCalc
                 dataGrids[tabControl.SelectedIndex][i, e.RowIndex].Selected = true;
                 horizontalGrids[tabControl.SelectedIndex][i, 0].Selected = true;
             }
+            verticalGrids[tabControl.SelectedIndex].ClearSelection();
+            verticalGrids[tabControl.SelectedIndex][0, e.RowIndex].Selected = true;
         }
 
         private void HorizontalGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -315,6 +319,8 @@ namespace SuperCalc
                 dataGrids[tabControl.SelectedIndex][e.ColumnIndex, i].Selected = true;
                 verticalGrids[tabControl.SelectedIndex][0, i].Selected = true;
             }
+            horizontalGrids[tabControl.SelectedIndex].ClearSelection();
+            horizontalGrids[tabControl.SelectedIndex][e.ColumnIndex, 0].Selected = true;
         }
 
         private void ColumnRowSelectedCellRedraw(object sender, EventArgs e)
@@ -352,6 +358,10 @@ namespace SuperCalc
 
         private void LayoutInit(ref TableLayoutPanel tableLayoutPanel, ref DoubleBufferedDataGridView dataGridView, ref DoubleBufferedDataGridView horizontalGrid, ref DoubleBufferedDataGridView verticalGrid)
         {
+            Button selectAllButton = new Button();
+            selectAllButton.MouseClick += SelectAllButton_MouseClick;
+            selectAllButton.BackColor = Color.FromArgb(61, 81, 181);
+
             tableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
             tableLayoutPanel.ColumnCount = 2;
             tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 47));
@@ -359,6 +369,7 @@ namespace SuperCalc
             tableLayoutPanel.Controls.Add(dataGridView, 1, 1);
             tableLayoutPanel.Controls.Add(horizontalGrid, 1, 0);
             tableLayoutPanel.Controls.Add(verticalGrid, 0, 1);
+            tableLayoutPanel.Controls.Add(selectAllButton, 0, 0);
             tableLayoutPanel.Dock = DockStyle.Fill;
             tableLayoutPanel.ForeColor = SystemColors.ActiveCaptionText;
             tableLayoutPanel.Location = new Point(0, 0);
@@ -368,6 +379,12 @@ namespace SuperCalc
             tableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             tableLayoutPanel.Size = new Size(800, 450);
             tableLayoutPanel.TabIndex = 0;
+        }
+
+        private void SelectAllButton_MouseClick(object sender, EventArgs e)
+        {
+            dataGrids[tabControl.SelectedIndex].SelectAll();
+            positionLabel.Text = "A1:Z1000";
         }
 
         private void DataGridView_Scroll(object sender, ScrollEventArgs e)
@@ -382,6 +399,27 @@ namespace SuperCalc
             {
                 verticalGrids[tabControl.SelectedIndex].FirstDisplayedScrollingRowIndex = dataGridView.FirstDisplayedScrollingRowIndex;
             }
+        }
+
+        private void clearSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGrids[tabControl.SelectedIndex].SelectedCells.Count; i++)
+            {
+                dataGrids[tabControl.SelectedIndex].SelectedCells[i].Value = null;
+            }
+        }
+
+        private void clearActiveColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGrids[tabControl.SelectedIndex].RowCount; i++)
+                dataGrids[tabControl.SelectedIndex][dataGrids[tabControl.SelectedIndex].CurrentCell.ColumnIndex, i].Value = null;
+            
+        }
+
+        private void clearActiveRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGrids[tabControl.SelectedIndex].ColumnCount; i++)
+                dataGrids[tabControl.SelectedIndex].CurrentRow.Cells[i].Value = null;
         }
     }
 }

@@ -51,6 +51,10 @@
             this.contextMenuStrip = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.deletePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renamePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearActiveColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripPanel.SuspendLayout();
@@ -151,7 +155,8 @@
             // 
             this.правкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.добавитьСтраницуToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.удалитьToolStripMenuItem});
             this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
             this.правкаToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.правкаToolStripMenuItem.Text = "Правка";
@@ -286,6 +291,37 @@
             this.renamePageToolStripMenuItem.Text = "Переименовать страницу";
             this.renamePageToolStripMenuItem.Click += new System.EventHandler(this.renamePageToolStripMenuItem_Click);
             // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearSelectedToolStripMenuItem,
+            this.clearActiveColumnToolStripMenuItem,
+            this.clearActiveRowToolStripMenuItem});
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.удалитьToolStripMenuItem.Text = "Очистить";
+            // 
+            // clearSelectedToolStripMenuItem
+            // 
+            this.clearSelectedToolStripMenuItem.Name = "clearSelectedToolStripMenuItem";
+            this.clearSelectedToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearSelectedToolStripMenuItem.Text = "Выделенные ячейки";
+            this.clearSelectedToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedToolStripMenuItem_Click);
+            // 
+            // clearActiveColumnToolStripMenuItem
+            // 
+            this.clearActiveColumnToolStripMenuItem.Name = "clearActiveColumnToolStripMenuItem";
+            this.clearActiveColumnToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearActiveColumnToolStripMenuItem.Text = "Активный столбец";
+            this.clearActiveColumnToolStripMenuItem.Click += new System.EventHandler(this.clearActiveColumnToolStripMenuItem_Click);
+            // 
+            // clearActiveRowToolStripMenuItem
+            // 
+            this.clearActiveRowToolStripMenuItem.Name = "clearActiveRowToolStripMenuItem";
+            this.clearActiveRowToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearActiveRowToolStripMenuItem.Text = "Активную строку";
+            this.clearActiveRowToolStripMenuItem.Click += new System.EventHandler(this.clearActiveRowToolStripMenuItem_Click);
+            // 
             // SuperCalcForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +375,10 @@
         private System.Windows.Forms.ToolStripMenuItem renamePageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьСтраницуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearActiveColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearActiveRowToolStripMenuItem;
     }
 }
 
