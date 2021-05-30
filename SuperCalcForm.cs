@@ -82,6 +82,16 @@ namespace SuperCalc
             dataGridView.DefaultCellStyle.SelectionBackColor = Color.FromArgb(61, 81, 181);
         }
 
+        private void VerticalGridRedispaly()
+        {
+            verticalGrids[tabControl.SelectedIndex].RowCount = dataGrids[tabControl.SelectedIndex].Rows.Count;
+
+            for (int i = 0; i < dataGrids[tabControl.SelectedIndex].Rows.Count; i++)
+            {
+                verticalGrids[tabControl.SelectedIndex][0, i].Value = (i + 1).ToString();
+            }
+        }
+
         private void DataGridView_CellValueChanged(object sender, EventArgs e)
         {
             isSaved = false;
@@ -458,8 +468,21 @@ namespace SuperCalc
             }
             else
             {
-                Data.dataSet.Tables[tabControl.SelectedIndex].Rows[rowIndex][columnIndex] = result;
+                Data.dataSet.Tables[tabControl.SelectedIndex].Rows[rowIndex][columnIndex] = DBNull.Value;
             }
+        }
+
+        private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.dataSet.Tables[tabControl.SelectedIndex].Rows.Add();
+            VerticalGridRedispaly();
+        }
+
+        private void deleteActiveRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dataGrids[tabControl.SelectedIndex].CurrentCellAddress.Y;
+            Data.dataSet.Tables[tabControl.SelectedIndex].Rows.RemoveAt(rowIndex);
+            VerticalGridRedispaly();
         }
     }
 }
