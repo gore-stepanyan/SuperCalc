@@ -484,5 +484,20 @@ namespace SuperCalc
             Data.dataSet.Tables[tabControl.SelectedIndex].Rows.RemoveAt(rowIndex);
             VerticalGridRedispaly();
         }
+
+        private void createToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!isSaved)
+            {
+                if (MaterialMessageBox.Show("Изменения не были сохранены. Продолжить?", "Внимание", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            Data.dataSet.Tables.Clear();
+            LoadTables();
+            AddPage();
+        }
     }
 }

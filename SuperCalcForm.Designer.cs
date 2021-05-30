@@ -38,10 +38,16 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьСтрокуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteActivePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearActiveColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPanel = new System.Windows.Forms.Panel();
             this.enterButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,12 +60,7 @@
             this.contextMenuStrip = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.deletePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renamePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьСтрокуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteActivePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addPageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripPanel.SuspendLayout();
@@ -119,8 +120,9 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
+            this.createToolStripMenuItem,
             this.openXmlToolStripMenuItem,
+            this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
@@ -130,28 +132,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Импорт .xls/.xlsx ";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // openXmlToolStripMenuItem
             // 
             this.openXmlToolStripMenuItem.Name = "openXmlToolStripMenuItem";
-            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openXmlToolStripMenuItem.Text = "Открыть";
             this.openXmlToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Сохранить";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Сохранить как...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -164,6 +166,29 @@
             this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
             this.правкаToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.правкаToolStripMenuItem.Text = "Правка";
+            // 
+            // удалитьСтрокуToolStripMenuItem
+            // 
+            this.удалитьСтрокуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteActivePageToolStripMenuItem,
+            this.deleteActiveRowToolStripMenuItem});
+            this.удалитьСтрокуToolStripMenuItem.Name = "удалитьСтрокуToolStripMenuItem";
+            this.удалитьСтрокуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.удалитьСтрокуToolStripMenuItem.Text = "Удалить...";
+            // 
+            // deleteActivePageToolStripMenuItem
+            // 
+            this.deleteActivePageToolStripMenuItem.Name = "deleteActivePageToolStripMenuItem";
+            this.deleteActivePageToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.deleteActivePageToolStripMenuItem.Text = "Активную страницу";
+            this.deleteActivePageToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // deleteActiveRowToolStripMenuItem
+            // 
+            this.deleteActiveRowToolStripMenuItem.Name = "deleteActiveRowToolStripMenuItem";
+            this.deleteActiveRowToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.deleteActiveRowToolStripMenuItem.Text = "Активную строку";
+            this.deleteActiveRowToolStripMenuItem.Click += new System.EventHandler(this.deleteActiveRowToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
@@ -196,6 +221,29 @@
             this.clearActiveRowToolStripMenuItem.Text = "Активную строку";
             this.clearActiveRowToolStripMenuItem.Click += new System.EventHandler(this.clearActiveRowToolStripMenuItem_Click);
             // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addPageToolStripMenuItem1,
+            this.addRowToolStripMenuItem});
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить...";
+            // 
+            // addPageToolStripMenuItem1
+            // 
+            this.addPageToolStripMenuItem1.Name = "addPageToolStripMenuItem1";
+            this.addPageToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
+            this.addPageToolStripMenuItem1.Text = "Добавить страницу";
+            this.addPageToolStripMenuItem1.Click += new System.EventHandler(this.addPageButton_Click);
+            // 
+            // addRowToolStripMenuItem
+            // 
+            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.addRowToolStripMenuItem.Text = "Добавить строку";
+            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            // 
             // toolStripPanel
             // 
             this.toolStripPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -210,7 +258,8 @@
             // 
             // enterButton
             // 
-            this.enterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.enterButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.enterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
             this.enterButton.FlatAppearance.BorderSize = 0;
             this.enterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -238,6 +287,9 @@
             // 
             // textBox
             // 
+            this.textBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.textBox.Location = new System.Drawing.Point(74, 6);
             this.textBox.Name = "textBox";
@@ -335,51 +387,12 @@
             this.renamePageToolStripMenuItem.Text = "Переименовать страницу";
             this.renamePageToolStripMenuItem.Click += new System.EventHandler(this.renamePageToolStripMenuItem_Click);
             // 
-            // удалитьСтрокуToolStripMenuItem
+            // createToolStripMenuItem
             // 
-            this.удалитьСтрокуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteActivePageToolStripMenuItem,
-            this.deleteActiveRowToolStripMenuItem});
-            this.удалитьСтрокуToolStripMenuItem.Name = "удалитьСтрокуToolStripMenuItem";
-            this.удалитьСтрокуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.удалитьСтрокуToolStripMenuItem.Text = "Удалить...";
-            // 
-            // deleteActiveRowToolStripMenuItem
-            // 
-            this.deleteActiveRowToolStripMenuItem.Name = "deleteActiveRowToolStripMenuItem";
-            this.deleteActiveRowToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.deleteActiveRowToolStripMenuItem.Text = "Активную строку";
-            this.deleteActiveRowToolStripMenuItem.Click += new System.EventHandler(this.deleteActiveRowToolStripMenuItem_Click);
-            // 
-            // deleteActivePageToolStripMenuItem
-            // 
-            this.deleteActivePageToolStripMenuItem.Name = "deleteActivePageToolStripMenuItem";
-            this.deleteActivePageToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.deleteActivePageToolStripMenuItem.Text = "Активную страницу";
-            this.deleteActivePageToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // добавитьToolStripMenuItem
-            // 
-            this.добавитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addPageToolStripMenuItem1,
-            this.addRowToolStripMenuItem});
-            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.добавитьToolStripMenuItem.Text = "Добавить...";
-            // 
-            // addPageToolStripMenuItem1
-            // 
-            this.addPageToolStripMenuItem1.Name = "addPageToolStripMenuItem1";
-            this.addPageToolStripMenuItem1.Size = new System.Drawing.Size(191, 22);
-            this.addPageToolStripMenuItem1.Text = "Добавить страницу";
-            this.addPageToolStripMenuItem1.Click += new System.EventHandler(this.addPageButton_Click);
-            // 
-            // addRowToolStripMenuItem
-            // 
-            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
-            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.addRowToolStripMenuItem.Text = "Добавить строку";
-            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            this.createToolStripMenuItem.Name = "createToolStripMenuItem";
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createToolStripMenuItem.Text = "Создать";
+            this.createToolStripMenuItem.Click += new System.EventHandler(this.createToolStripMenuItem_Click);
             // 
             // SuperCalcForm
             // 
@@ -443,6 +456,7 @@
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addPageToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem addRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createToolStripMenuItem;
     }
 }
 
