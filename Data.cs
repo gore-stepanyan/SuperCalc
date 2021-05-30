@@ -35,11 +35,6 @@ namespace SuperCalc
                 DataTable dataTable = new DataTable();
                 OleDbDataAdapter adapter = new OleDbDataAdapter("select * from [" + tableName + "]", connection);
 
-                //for (int i = 0; i < dataTable.Columns.Count; i++)
-                //{
-                //    dataTable.Columns[i].DataType = typeof(string);
-                //}
-                
                 adapter.Fill(dataTable);
 
                 dataTable.TableName = tableName;
@@ -76,11 +71,13 @@ namespace SuperCalc
             {
                 newDataTable.Columns.Add();
             }
+
             for (int i = 0; i < 1000; i++)
             {
                 dataRow = newDataTable.NewRow();
                 newDataTable.Rows.Add(dataRow);
             }
+
             for (int i = 0; i < 26; i++)
             {
                 newDataTable.Rows[999][i] = "\0";

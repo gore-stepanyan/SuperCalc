@@ -414,30 +414,52 @@ namespace SuperCalc
         {
             for (int i = 0; i < dataGrids[tabControl.SelectedIndex].SelectedCells.Count; i++)
             {
-                dataGrids[tabControl.SelectedIndex].SelectedCells[i].Value = null;
+                dataGrids[tabControl.SelectedIndex].SelectedCells[i].Value = DBNull.Value;
             }
         }
 
         private void clearActiveColumnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dataGrids[tabControl.SelectedIndex].RowCount; i++)
-                dataGrids[tabControl.SelectedIndex][dataGrids[tabControl.SelectedIndex].CurrentCell.ColumnIndex, i].Value = null;
+                dataGrids[tabControl.SelectedIndex][dataGrids[tabControl.SelectedIndex].CurrentCell.ColumnIndex, i].Value = DBNull.Value;
             
         }
 
         private void clearActiveRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < dataGrids[tabControl.SelectedIndex].ColumnCount; i++)
-                dataGrids[tabControl.SelectedIndex].CurrentRow.Cells[i].Value = null;
+                dataGrids[tabControl.SelectedIndex].CurrentRow.Cells[i].Value = DBNull.Value;
         }
 
 
         private void enterButton_Click(object sender, EventArgs e)
         {
+            Evaluate();    
+        }
+
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Evaluate();
+            }
+        }
+
+        public void Evaluate()
+        {
             int rowIndex = dataGrids[tabControl.SelectedIndex].CurrentCell.RowIndex;
             int columnIndex = dataGrids[tabControl.SelectedIndex].CurrentCell.ColumnIndex;
-            
-            Data.dataSet.Tables[tabControl.SelectedIndex].Rows[rowIndex][columnIndex] = Expression.Evaluate(textBox.Text, tabControl.SelectedIndex);
+            string result = Expression.Evaluate(textBox.Text, tabControl.SelectedIndex);
+
+            if (result == null)
+            {
+                textBox.Text = "ошибка";
+
+            }
+            else
+            {
+                Data.dataSet.Tables[tabControl.SelectedIndex].Rows[rowIndex][columnIndex] = result;
+            }
         }
     }
 }

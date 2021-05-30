@@ -45,6 +45,9 @@
             this.clearActiveColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPanel = new System.Windows.Forms.Panel();
+            this.enterButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.positionLabel = new System.Windows.Forms.Label();
             this.addPageButton = new System.Windows.Forms.Button();
@@ -53,9 +56,6 @@
             this.contextMenuStrip = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.deletePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renamePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.enterButton = new System.Windows.Forms.Button();
             this.menuStripPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripPanel.SuspendLayout();
@@ -126,28 +126,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.openToolStripMenuItem.Text = "Импорт из Excel";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // openXmlToolStripMenuItem
             // 
             this.openXmlToolStripMenuItem.Name = "openXmlToolStripMenuItem";
-            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.openXmlToolStripMenuItem.Text = "Открыть";
             this.openXmlToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.saveToolStripMenuItem.Text = "Сохранить";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.saveAsToolStripMenuItem.Text = "Сохранить как...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -217,6 +217,43 @@
             this.toolStripPanel.Name = "toolStripPanel";
             this.toolStripPanel.Size = new System.Drawing.Size(750, 37);
             this.toolStripPanel.TabIndex = 10;
+            // 
+            // enterButton
+            // 
+            this.enterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.enterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.enterButton.FlatAppearance.BorderSize = 0;
+            this.enterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.enterButton.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.enterButton.ForeColor = System.Drawing.Color.White;
+            this.enterButton.Location = new System.Drawing.Point(672, 6);
+            this.enterButton.Name = "enterButton";
+            this.enterButton.Size = new System.Drawing.Size(72, 24);
+            this.enterButton.TabIndex = 2;
+            this.enterButton.Text = "Ввод";
+            this.enterButton.UseVisualStyleBackColor = false;
+            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Формула:";
+            // 
+            // textBox
+            // 
+            this.textBox.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.textBox.Location = new System.Drawing.Point(74, 6);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(592, 25);
+            this.textBox.TabIndex = 1;
+            this.textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // panel1
             // 
@@ -307,42 +344,6 @@
             this.renamePageToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.renamePageToolStripMenuItem.Text = "Переименовать страницу";
             this.renamePageToolStripMenuItem.Click += new System.EventHandler(this.renamePageToolStripMenuItem_Click);
-            // 
-            // textBox
-            // 
-            this.textBox.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.textBox.Location = new System.Drawing.Point(74, 6);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(592, 25);
-            this.textBox.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 17);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Формула:";
-            // 
-            // enterButton
-            // 
-            this.enterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.enterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
-            this.enterButton.FlatAppearance.BorderSize = 0;
-            this.enterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.enterButton.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.enterButton.ForeColor = System.Drawing.Color.White;
-            this.enterButton.Location = new System.Drawing.Point(672, 6);
-            this.enterButton.Name = "enterButton";
-            this.enterButton.Size = new System.Drawing.Size(72, 24);
-            this.enterButton.TabIndex = 2;
-            this.enterButton.Text = "Ввод";
-            this.enterButton.UseVisualStyleBackColor = false;
-            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
             // 
             // SuperCalcForm
             // 
