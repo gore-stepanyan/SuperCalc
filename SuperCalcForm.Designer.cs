@@ -360,7 +360,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(750, 351);
             this.tabControl.TabIndex = 9;
-            this.tabControl.DoubleClick += new System.EventHandler(this.tabControl_DoubleClick);
             // 
             // contextMenuStrip
             // 

@@ -7,10 +7,12 @@ using System.Data;
 
 namespace SuperCalc
 {
+    // Класс вычисления выражений
     public static class Expression
     {
         public static string Evaluate(string expression, int table)
         {
+            // Обработка простых запросов
             if (expression.Contains("СУММА:"))
             {
                 return Sum(expression, table);
@@ -28,6 +30,7 @@ namespace SuperCalc
                 return Min(expression, table);
             }
 
+            // Замена адресов ячеек на их значения
             Replace(ref expression, table);
             object result;
             using (var dataTable = new DataTable())
@@ -35,6 +38,7 @@ namespace SuperCalc
                 try
                 {
                     expression = expression.Replace(',', '.'); // Культурные особенности
+                    // Вычисление
                     result = dataTable.Compute(expression, null);
                 }
                 catch 
@@ -50,6 +54,7 @@ namespace SuperCalc
 
         private static void Replace(ref string expression, int table)
         {
+            // Замена адресов ячеек на их значения
             List<string> adressList = expression.Split('%', '&' , '*', ' ', '(', ')', '-', '+', '=', '/').ToList();
             foreach (string adress in adressList)
             {
@@ -62,6 +67,7 @@ namespace SuperCalc
 
         private static string Find(string adress, int table)
         {
+            // Обращение к ячейке по адресу и возрат значения
             int columnIndex = adress[0] - 'A' + 1;
             int rowIndex;
             if (!int.TryParse(adress.Remove(0, 1), out rowIndex))
@@ -76,6 +82,7 @@ namespace SuperCalc
 
         private static string Sum(string expression, int table)
         {
+            // Суммирование значений ячеек в колонке
             int columnIndex = expression[6] - 'A' + 1;
 
             double result = 0;
@@ -98,6 +105,7 @@ namespace SuperCalc
 
         private static string Count(string expression, int table)
         {
+            // Подсчёт непустых ячеек в колонке
             int columnIndex = expression[5] - 'A' + 1;
 
             double result = 0;
@@ -113,6 +121,7 @@ namespace SuperCalc
 
         private static string Max(string expression, int table)
         {
+            // Поиск максимального значения ячейки в колонке
             int columnIndex = expression[5] - 'A' + 1;
 
             double result = 0;
@@ -135,6 +144,7 @@ namespace SuperCalc
 
         private static string Min(string expression, int table)
         {
+            // Поиск минимального значения ячейки в колонке
             int columnIndex = expression[4] - 'A' + 1;
 
             double result = double.MaxValue;

@@ -9,13 +9,15 @@ using System.IO;
 
 namespace SuperCalc
 {
+    // Класс базы данных
     public static class Data
     {
         public static List<string> tableNames = new List<string>(); // Список имён таблиц
-        public static DataSet dataSet = new DataSet();
+        public static DataSet dataSet = new DataSet(); // Непосредственно документ (таблицы)
 
         public static void Import(string fileName)
         {
+            // Импорт из Excel
             OleDbConnection connection = new OleDbConnection();
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + @";Extended Properties='Excel 12.0 XML;HDR=NO'";
 
@@ -30,6 +32,8 @@ namespace SuperCalc
             }
 
             dataSet.Tables.Clear();
+
+            // Получение таблиц, форматирование
             foreach (string tableName in tableNames)
             {
                 DataTable dataTable = new DataTable();
@@ -55,29 +59,32 @@ namespace SuperCalc
                 }
                 for (int i = columnCount; i < 26; i++)
                 {
+                    // Маркер конца файла
                     dataTable.Rows[999][i] = "\0";
                 }
             }
-
+            
+            // Освобождение ресурсов
             connection.Close();
             connection.Dispose();
         }
         public static void AddNewDataTable()
         {
+            // Добавление новой таблицы
             DataTable newDataTable = new DataTable();
             newDataTable.TableName = "Лист" + (dataSet.Tables.Count + 1).ToString();
             DataRow dataRow;
+
+            // Форматирование
             for (int i = 0; i < 26; i++)
             {
                 newDataTable.Columns.Add();
             }
-
             for (int i = 0; i < 1000; i++)
             {
                 dataRow = newDataTable.NewRow();
                 newDataTable.Rows.Add(dataRow);
             }
-
             for (int i = 0; i < 26; i++)
             {
                 newDataTable.Rows[999][i] = "\0";
@@ -89,12 +96,14 @@ namespace SuperCalc
 
         public static void Open(string fileName)
         {
+            // Очистка таблиц, чтение документа
             dataSet.Tables.Clear();
             dataSet.ReadXml(fileName);
         }
 
         public static void Save(string path)
         {
+            // Запись документа
             dataSet.WriteXml(path);
         }
     }
