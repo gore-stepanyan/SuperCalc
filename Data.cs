@@ -41,19 +41,19 @@ namespace SuperCalc
                 dataSet.Tables.Add(dataTable);
 
                 DataRow dataRow;
-                int tempColumnCount = dataTable.Columns.Count;
-                int rowColumnCount = dataTable.Rows.Count;
+                int columnCount = dataTable.Columns.Count;
+                int rowCount = dataTable.Rows.Count;
                 
-                for (int i = 0; i < 26 - tempColumnCount; i++)
+                for (int i = 0; i < 26 - columnCount; i++)
                 {
                     dataTable.Columns.Add();
                 }
-                for (int i = 0; i < 1000 - rowColumnCount; i++)
+                for (int i = 0; i < 1000 - rowCount; i++)
                 {
                     dataRow = dataTable.NewRow();
                     dataTable.Rows.Add(dataRow);
                 }
-                for (int i = tempColumnCount; i < 26; i++)
+                for (int i = columnCount; i < 26; i++)
                 {
                     dataTable.Rows[999][i] = "\0";
                 }
