@@ -5,9 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 using System.Data;
-using System.Web;
 using System.IO;
-using System.Xml;
 
 namespace SuperCalc
 {
@@ -22,8 +20,7 @@ namespace SuperCalc
             connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileName + @";Extended Properties='Excel 12.0 XML;HDR=NO'";
 
             connection.Open();
-            DataTable tables = new DataTable();
-            tables = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            DataTable tables = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
             // Получение имён таблиц
             tableNames.Clear();
@@ -37,7 +34,14 @@ namespace SuperCalc
             {
                 DataTable dataTable = new DataTable();
                 OleDbDataAdapter adapter = new OleDbDataAdapter("select * from [" + tableName + "]", connection);
+
+                //for (int i = 0; i < dataTable.Columns.Count; i++)
+                //{
+                //    dataTable.Columns[i].DataType = typeof(string);
+                //}
+                
                 adapter.Fill(dataTable);
+
                 dataTable.TableName = tableName;
                 dataSet.Tables.Add(dataTable);
 

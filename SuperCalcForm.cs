@@ -21,9 +21,22 @@ namespace SuperCalc
         public SuperCalcForm()
         {
             InitializeComponent();
+            AddPage();
         }
 
         private void addPageButton_Click(object sender, EventArgs e)
+        {
+            AddPage();
+            isSaved = false;
+        }
+
+        private void tabControl_DoubleClick(object sender, EventArgs e)
+        {
+            AskForm askForm = new AskForm("Вы гей!");
+            askForm.ShowDialog();
+        }
+
+        private void AddPage()
         {
             Data.AddNewDataTable();
 
@@ -36,7 +49,7 @@ namespace SuperCalc
 
             dataGridView.DataSource = Data.dataSet.Tables[Data.dataSet.Tables.Count - 1];
             dataGrids.Add(dataGridView);
-            
+
             RowColumnInit(Data.dataSet.Tables.Count - 1, ref horizontalGrid, ref verticalGrid);
             verticalGrids.Add(verticalGrid);
             horizontalGrids.Add(horizontalGrid);
@@ -45,14 +58,6 @@ namespace SuperCalc
             tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(tableLayoutPanel);
             tabControl.TabPages[tabControl.TabPages.Count - 1].ContextMenuStrip = contextMenuStrip;
             LayoutInit(ref tableLayoutPanel, ref dataGridView, ref horizontalGrid, ref verticalGrid);
-
-            isSaved = false;
-        }
-
-        private void tabControl_DoubleClick(object sender, EventArgs e)
-        {
-            AskForm askForm = new AskForm("Вы гей!");
-            askForm.ShowDialog();
         }
 
         private void GridInit(ref DoubleBufferedDataGridView dataGridView)
@@ -85,7 +90,9 @@ namespace SuperCalc
         private void DataGridView_CurrentCellChanged(object sender, EventArgs e)
         {
             DataGridView dataGridView = sender as DataGridView;
-            positionLabel.Text = Convert.ToChar('A' + dataGridView.CurrentCellAddress.X).ToString() + (dataGridView.CurrentCellAddress.Y + 1).ToString();
+            int rowIndex = dataGridView.CurrentCellAddress.Y;
+            int columnIndex = dataGridView.CurrentCellAddress.X;
+            positionLabel.Text = Convert.ToChar('A' + columnIndex).ToString() + (rowIndex + 1).ToString();
         }
 
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
@@ -205,7 +212,7 @@ namespace SuperCalc
         {
             if (!isSaved)
             {
-                if (MaterialMessageBox.Show("Изменения не были сохранены. Продолжить?", "Внимание", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                if (MaterialMessageBox.Show("Изменения не были сохранены. Продолжить?",  "Внимание", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                 }
@@ -328,9 +335,11 @@ namespace SuperCalc
             try
             {
                 DataGridView dataGridView = sender as DataGridView;
+                int rowIndex = dataGridView.CurrentCell.RowIndex;
+                int columnIndex = dataGridView.CurrentCell.ColumnIndex;
 
-                horizontalGrids[tabControl.SelectedIndex].CurrentCell = horizontalGrids[tabControl.SelectedIndex][dataGridView.CurrentCell.ColumnIndex, 0];
-                verticalGrids[tabControl.SelectedIndex].CurrentCell = verticalGrids[tabControl.SelectedIndex][0, dataGridView.CurrentCell.RowIndex];
+                horizontalGrids[tabControl.SelectedIndex].CurrentCell = horizontalGrids[tabControl.SelectedIndex][columnIndex, 0];
+                verticalGrids[tabControl.SelectedIndex].CurrentCell = verticalGrids[tabControl.SelectedIndex][0, rowIndex];
             }
             catch
             { }
@@ -420,6 +429,15 @@ namespace SuperCalc
         {
             for (int i = 0; i < dataGrids[tabControl.SelectedIndex].ColumnCount; i++)
                 dataGrids[tabControl.SelectedIndex].CurrentRow.Cells[i].Value = null;
+        }
+
+
+        private void enterButton_Click(object sender, EventArgs e)
+        {
+            int rowIndex = dataGrids[tabControl.SelectedIndex].CurrentCell.RowIndex;
+            int columnIndex = dataGrids[tabControl.SelectedIndex].CurrentCell.ColumnIndex;
+            
+            Data.dataSet.Tables[tabControl.SelectedIndex].Rows[rowIndex][columnIndex] = Expression.Evaluate(textBox.Text, tabControl.SelectedIndex);
         }
     }
 }

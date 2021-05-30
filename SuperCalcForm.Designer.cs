@@ -40,9 +40,11 @@
             this.правкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьСтраницуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearActiveColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripPanel = new System.Windows.Forms.Panel();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.positionLabel = new System.Windows.Forms.Label();
             this.addPageButton = new System.Windows.Forms.Button();
@@ -51,10 +53,9 @@
             this.contextMenuStrip = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.deletePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renamePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearActiveColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearActiveRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.enterButton = new System.Windows.Forms.Button();
             this.menuStripPanel.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.toolStripPanel.SuspendLayout();
@@ -105,8 +106,7 @@
             this.menuStrip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
-            this.правкаToolStripMenuItem,
-            this.видToolStripMenuItem});
+            this.правкаToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(750, 24);
@@ -126,28 +126,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Импорт из Excel";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // openXmlToolStripMenuItem
             // 
             this.openXmlToolStripMenuItem.Name = "openXmlToolStripMenuItem";
-            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.openXmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openXmlToolStripMenuItem.Text = "Открыть";
             this.openXmlToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Сохранить";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Сохранить как...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -175,31 +175,48 @@
             this.deleteToolStripMenuItem.Text = "Удалить страницу";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // видToolStripMenuItem
+            // удалитьToolStripMenuItem
             // 
-            this.видToolStripMenuItem.Name = "видToolStripMenuItem";
-            this.видToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.видToolStripMenuItem.Text = "Вид";
+            this.удалитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearSelectedToolStripMenuItem,
+            this.clearActiveColumnToolStripMenuItem,
+            this.clearActiveRowToolStripMenuItem});
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.удалитьToolStripMenuItem.Text = "Очистить";
+            // 
+            // clearSelectedToolStripMenuItem
+            // 
+            this.clearSelectedToolStripMenuItem.Name = "clearSelectedToolStripMenuItem";
+            this.clearSelectedToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearSelectedToolStripMenuItem.Text = "Выделенные ячейки";
+            this.clearSelectedToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedToolStripMenuItem_Click);
+            // 
+            // clearActiveColumnToolStripMenuItem
+            // 
+            this.clearActiveColumnToolStripMenuItem.Name = "clearActiveColumnToolStripMenuItem";
+            this.clearActiveColumnToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearActiveColumnToolStripMenuItem.Text = "Активный столбец";
+            this.clearActiveColumnToolStripMenuItem.Click += new System.EventHandler(this.clearActiveColumnToolStripMenuItem_Click);
+            // 
+            // clearActiveRowToolStripMenuItem
+            // 
+            this.clearActiveRowToolStripMenuItem.Name = "clearActiveRowToolStripMenuItem";
+            this.clearActiveRowToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.clearActiveRowToolStripMenuItem.Text = "Активную строку";
+            this.clearActiveRowToolStripMenuItem.Click += new System.EventHandler(this.clearActiveRowToolStripMenuItem_Click);
             // 
             // toolStripPanel
             // 
             this.toolStripPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.toolStripPanel.Controls.Add(this.toolStrip);
+            this.toolStripPanel.Controls.Add(this.enterButton);
+            this.toolStripPanel.Controls.Add(this.label1);
+            this.toolStripPanel.Controls.Add(this.textBox);
             this.toolStripPanel.Location = new System.Drawing.Point(0, 88);
             this.toolStripPanel.Name = "toolStripPanel";
-            this.toolStripPanel.Size = new System.Drawing.Size(750, 48);
+            this.toolStripPanel.Size = new System.Drawing.Size(750, 37);
             this.toolStripPanel.TabIndex = 10;
-            // 
-            // toolStrip
-            // 
-            this.toolStrip.BackColor = System.Drawing.Color.Transparent;
-            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(750, 48);
-            this.toolStrip.TabIndex = 0;
             // 
             // panel1
             // 
@@ -247,9 +264,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridPanel.BackColor = System.Drawing.SystemColors.Control;
             this.dataGridPanel.Controls.Add(this.tabControl);
-            this.dataGridPanel.Location = new System.Drawing.Point(0, 137);
+            this.dataGridPanel.Location = new System.Drawing.Point(0, 125);
             this.dataGridPanel.Name = "dataGridPanel";
-            this.dataGridPanel.Size = new System.Drawing.Size(750, 339);
+            this.dataGridPanel.Size = new System.Drawing.Size(750, 351);
             this.dataGridPanel.TabIndex = 12;
             // 
             // tabControl
@@ -262,7 +279,7 @@
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(4, 4);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(750, 339);
+            this.tabControl.Size = new System.Drawing.Size(750, 351);
             this.tabControl.TabIndex = 9;
             this.tabControl.DoubleClick += new System.EventHandler(this.tabControl_DoubleClick);
             // 
@@ -291,36 +308,41 @@
             this.renamePageToolStripMenuItem.Text = "Переименовать страницу";
             this.renamePageToolStripMenuItem.Click += new System.EventHandler(this.renamePageToolStripMenuItem_Click);
             // 
-            // удалитьToolStripMenuItem
+            // textBox
             // 
-            this.удалитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearSelectedToolStripMenuItem,
-            this.clearActiveColumnToolStripMenuItem,
-            this.clearActiveRowToolStripMenuItem});
-            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.удалитьToolStripMenuItem.Text = "Очистить";
+            this.textBox.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.textBox.Location = new System.Drawing.Point(74, 6);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(592, 25);
+            this.textBox.TabIndex = 1;
             // 
-            // clearSelectedToolStripMenuItem
+            // label1
             // 
-            this.clearSelectedToolStripMenuItem.Name = "clearSelectedToolStripMenuItem";
-            this.clearSelectedToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.clearSelectedToolStripMenuItem.Text = "Выделенные ячейки";
-            this.clearSelectedToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedToolStripMenuItem_Click);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Формула:";
             // 
-            // clearActiveColumnToolStripMenuItem
+            // enterButton
             // 
-            this.clearActiveColumnToolStripMenuItem.Name = "clearActiveColumnToolStripMenuItem";
-            this.clearActiveColumnToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.clearActiveColumnToolStripMenuItem.Text = "Активный столбец";
-            this.clearActiveColumnToolStripMenuItem.Click += new System.EventHandler(this.clearActiveColumnToolStripMenuItem_Click);
-            // 
-            // clearActiveRowToolStripMenuItem
-            // 
-            this.clearActiveRowToolStripMenuItem.Name = "clearActiveRowToolStripMenuItem";
-            this.clearActiveRowToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.clearActiveRowToolStripMenuItem.Text = "Активную строку";
-            this.clearActiveRowToolStripMenuItem.Click += new System.EventHandler(this.clearActiveRowToolStripMenuItem_Click);
+            this.enterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.enterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(81)))), ((int)(((byte)(181)))));
+            this.enterButton.FlatAppearance.BorderSize = 0;
+            this.enterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.enterButton.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.enterButton.ForeColor = System.Drawing.Color.White;
+            this.enterButton.Location = new System.Drawing.Point(672, 6);
+            this.enterButton.Name = "enterButton";
+            this.enterButton.Size = new System.Drawing.Size(72, 24);
+            this.enterButton.TabIndex = 2;
+            this.enterButton.Text = "Ввод";
+            this.enterButton.UseVisualStyleBackColor = false;
+            this.enterButton.Click += new System.EventHandler(this.enterButton_Click);
             // 
             // SuperCalcForm
             // 
@@ -358,9 +380,7 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem правкаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видToolStripMenuItem;
         private System.Windows.Forms.Panel toolStripPanel;
-        private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel dataGridPanel;
         private System.Windows.Forms.TabControl tabControl;
@@ -379,6 +399,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearActiveColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearActiveRowToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox;
+        private System.Windows.Forms.Button enterButton;
+        private System.Windows.Forms.Label label1;
     }
 }
 
