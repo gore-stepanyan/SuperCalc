@@ -28,7 +28,7 @@ namespace SuperCalc
             if (ShowDialog() == DialogResult.Yes)
                 return newName;
             else
-                return "";
+                return null;
         }
     }
 }
